@@ -28,3 +28,18 @@ module.exports = config;
   - `path`, the fully qualified path were to put the build
   - `filename`, the name of the build
 - **Note:** webpack runs on a `node.js` environment, so all `node.js` api's are available
+
+```js
+const path = require("path");
+
+const config = {
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "build"),
+    filename: "bundle.js",
+  },
+};
+
+module.exports = config;
+```
+
