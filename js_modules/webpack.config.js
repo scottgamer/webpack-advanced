@@ -7,6 +7,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
+    publicPath: "build/",
   },
   module: {
     rules: [
@@ -18,6 +19,16 @@ const config = {
         test: /\.css$/,
         // use: ["style-loader", "css-loader"],
         use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: { limit: 40000 },
+          },
+          `image-webpack-loader`,
+        ],
       },
     ],
   },
