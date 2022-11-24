@@ -82,3 +82,31 @@ module.exports = config;
 - install them with: `npm i -D style-loader css-loader`
 
 **Important:** loaders are applied from **right** to **left**!!
+
+- **mini-css-extract-plugin**
+
+  - allows to extract the `css` styles into a separate file
+  - works along with `css-loader`
+
+  ```js
+  const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+  const config = {
+    ...
+    module: {
+     rules: [
+       {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+     ]
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: "style.css",
+      }),
+    ],
+  }
+  ```
+
+  - needs to import the generated `style.css` file into the `index.html` file
