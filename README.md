@@ -87,6 +87,7 @@ module.exports = config;
 
   - allows to extract the `css` styles into a separate file
   - works along with `css-loader`
+  - install with: `npm i -D mini-css-extract-plugin`
 
   ```js
   const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -110,3 +111,31 @@ module.exports = config;
   ```
 
   - needs to import the generated `style.css` file into the `index.html` file
+
+- **image-webpack-loader**
+  - resizes an image
+  - install with: `npm i -D image-webpack-loader`
+- **url-loader**
+
+  - checks the size of the generated image
+  - if the image is small: includes the image in the `bundle.js` as raw data (base64)
+  - if the image is big: includes the raw image in the output directory
+  - install with: `npm i -D url-loader`
+    **Note:** to successfully append the generated files to the `build` it's necessary to install the `file-loader`: `npm i -D file-loader`, and set the `output.publicPath` to `"build/"`
+
+  ```js
+  module: {
+    rules: [
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: { limit: 40000 },
+          },
+          `image-webpack-loader`,
+        ],
+      },
+    ]
+  },
+  ```
